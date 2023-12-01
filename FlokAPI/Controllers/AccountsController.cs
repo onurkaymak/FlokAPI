@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using FlokAPI.Models;
+using System.Threading.Tasks;
 
 namespace FlockAPI.Controllers;
 
@@ -19,4 +20,28 @@ public class AccountsController : ControllerBase
     _configuration = configuration;
     _roleManager = roleManager;
   }
+
+
+
+
+  private async Task CreateRoles()
+  {
+    // This method iterates through an array of role names and checks if the role already exists with RoleExistsAsync method. 
+    // If the role does not exist, it creates the role using CreateAsync method.
+
+    string[] roleNames = { "Auto Detailer", "Customer Service Agent", "Manager" };
+
+    foreach (var roleName in roleNames)
+    {
+      var roleExist = await _roleManager.RoleExistsAsync(roleName);
+
+      if (!roleExist)
+      {
+        await _roleManager.CreateAsync(new IdentityRole(roleName));
+      }
+    }
+  }
+
+
+
 }
