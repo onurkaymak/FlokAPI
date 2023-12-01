@@ -16,4 +16,5 @@ Friday, 12/01/2023
  * 11:29 - Thinking about how to test this API for account creation, how to use JWT.
  * 11:35 - Creating Register class as data transfer object (DTO).
  * 11:45 - Lunch Break
+ * 01:00 - Brainstorming about controllers structure.
 ```
