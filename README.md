@@ -16,4 +16,8 @@ Friday, 12/01/2023
  * 09:54 - Creating API endpoints on Miro.
 
  * 10:17 - Creating ASP.NET Web API project. 
+
+ * 10:45 - WIP building the initial project files.
+
+ * 10:55 - Starting to work on first Models, taking advantage of thinking / working on project in Thanksgiving break!
 ```
