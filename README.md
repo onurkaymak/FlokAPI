@@ -20,4 +20,6 @@ Friday, 12/01/2023
  * 10:45 - WIP building the initial project files.
 
  * 10:55 - Starting to work on first Models, taking advantage of thinking / working on project in Thanksgiving break!
+ 
+ * 11:21 - Creating DbContext for EF Core.
 ```
