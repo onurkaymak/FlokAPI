@@ -12,4 +12,8 @@ Friday, 12/01/2023
  * 09:13 - Working on database schema, using SQL designer. (https://sql.toad.cz/)
 
  * 09:32 - Created the database schema, pushing the schema on repo.
+
+ * 09:54 - Creating API endpoints on Miro.
+
+ * 10:17 - Creating ASP.NET Web API project. 
 ```
