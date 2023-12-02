@@ -27,4 +27,6 @@ Friday, 12/01/2023
 * 03:09 PM - Fixed the bug, Register route successfully creates an account with defined Identity role.
 * 03:26 PM - Working on migrations to initialize the database.
 * 03:54 PM - Initialized the database successfully, application creates an account with defines Identity role.
+* 04:05 PM - Brainstorming about a route that allows registered accounts to sign in.
+* 04:35 PM - Checking Microsoft's documentation about SignInManger, I already work with this class but I want to make sure before use it.
 ```
