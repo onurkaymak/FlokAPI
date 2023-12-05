@@ -29,4 +29,11 @@ Friday, 12/01/2023
 * 03:54 PM - Initialized the database successfully, application creates an account with defines Identity role.
 * 04:05 PM - Brainstorming about a route that allows registered accounts to sign in.
 * 04:35 PM - Checking Microsoft's documentation about SignInManger, I already work with this class but I want to make sure before use it.
+
+Tue, 12/05/2023
+
+* 05:40 AM - Create CreateToken method, this method is used in SignIn route, it creates JSON Web Tokens to send to the user in response.
+* 06:03 AM - Searching about JWT, trying to decide what data needs to be in response tokens to use for future requests.
+* 06:07 AM - Using JWT Debugger tool to read successfully created tokens as part of SignIn route response, it works as expected (https://jwt.io/).
+* 06:28 AM - Testing the successfully create accounts on MySQL workbench.
 ```
