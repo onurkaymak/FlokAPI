@@ -3,6 +3,9 @@ using FlokAPI.Models;
 using System.Threading.Tasks;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 
 namespace FlockAPI.Controllers;
 
@@ -76,6 +79,22 @@ public class AccountsController : ControllerBase
         await _roleManager.CreateAsync(new IdentityRole(roleName));
       }
     }
+  }
+
+
+  private string CreateToken(List<Claim> authClaims)
+  {
+    var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
+
+    var token = new JwtSecurityToken(
+        issuer: _configuration["JWT:ValidIssuer"],
+        audience: _configuration["JWT:ValidAudience"],
+        expires: DateTime.Now.AddHours(3),
+        claims: authClaims,
+        signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+        );
+
+    return new JwtSecurityTokenHandler().WriteToken(token);
   }
 
 
