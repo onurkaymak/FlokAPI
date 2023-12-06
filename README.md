@@ -35,5 +35,7 @@ Tue, 12/05/2023
 * 05:40 AM - Create CreateToken method, this method is used in SignIn route, it creates JSON Web Tokens to send to the user in response.
 * 06:03 AM - Searching about JWT, trying to decide what data needs to be in response tokens to use for future requests.
 * 06:07 AM - Using JWT Debugger tool to read successfully created tokens as part of SignIn route response, it works as expected (https://jwt.io/).
-* 06:28 AM - Testing the successfully create accounts on MySQL workbench.
+* 06:28 AM - Testing the successfully created accounts on MySQL workbench.
+* 09:58 PM - Created a Vehicle entity.
+* 10:05 PM - Added a new migration (Vehicle).
 ```

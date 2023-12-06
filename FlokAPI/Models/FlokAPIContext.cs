@@ -6,6 +6,7 @@ namespace FlokAPI.Models
 {
   public class FlokAPIContext : IdentityDbContext<ApplicationUser>
   {
+    public DbSet<Vehicle> Vehicles { get; set; }
 
     public FlokAPIContext(DbContextOptions<FlokAPIContext> options) : base(options)
     {
