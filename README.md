@@ -39,5 +39,7 @@ Tue, 12/05/2023
 * 09:58 PM - Created a Vehicle entity.
 * 10:11 PM - Added a new migration (Vehicle).
 * 10:15 PM - WIP new controller.
+* 10:27 PM - Searching about boolean data types in MySQL, found really interesting answers on Stack Overflow and decided to go with "TINYINT".
+(https://stackoverflow.com/questions/289727/which-mysql-data-type-to-use-for-storing-boolean-values)
 * 10:36 PM - Created a fleet controller.
 ```
