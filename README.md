@@ -37,5 +37,7 @@ Tue, 12/05/2023
 * 06:07 AM - Using JWT Debugger tool to read successfully created tokens as part of SignIn route response, it works as expected (https://jwt.io/).
 * 06:28 AM - Testing the successfully created accounts on MySQL workbench.
 * 09:58 PM - Created a Vehicle entity.
-* 10:05 PM - Added a new migration (Vehicle).
+* 10:11 PM - Added a new migration (Vehicle).
+* 10:15 PM - WIP new controller.
+* 10:36 PM - Created a fleet controller.
 ```

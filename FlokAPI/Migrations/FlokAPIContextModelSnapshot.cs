@@ -86,6 +86,44 @@ namespace FlokAPI.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("FlokAPI.Models.Vehicle", b =>
+                {
+                    b.Property<int>("VehicleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Class")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ClassCode")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Color")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("InProduction")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsRented")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Make")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("Mileage")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Model")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("VIN")
+                        .HasColumnType("int");
+
+                    b.HasKey("VehicleId");
+
+                    b.ToTable("Vehicles");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")

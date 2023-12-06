@@ -75,8 +75,8 @@ public class AccountsController : ControllerBase
       {
         var authClaims = new List<Claim>
             {
-               new Claim("UserId", user.Id)
-               new Claim("UserName", user.UserName)
+               new Claim("UserId", user.Id),
+               new Claim("UserName", user.UserName),
                new Claim("Role", user.Role)
             };
 
