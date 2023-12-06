@@ -17,4 +17,11 @@ public class FleetController : ControllerBase
     _db = db;
   }
 
+  [HttpPost]
+  public async Task<ActionResult<Vehicle>> Post(Vehicle vehicle)
+  {
+    _db.Vehicles.Add(vehicle);
+    await _db.SaveChangesAsync();
+    return Ok(new { status = "success", message = "Vehicle added into the inventory.", vehicle = vehicle });
+  }
 }

@@ -1,8 +1,7 @@
-### Research & Planning Log
+## Research & Planning Log
 
+## Friday, 12/01/2023
 ```
-Friday, 12/01/2023
-
 * 08:00 AM - Initialize the project repo.
 * 08:30 AM - WIP capstone proposal.
 * 09:00 AM - Working on back end API structure, using a Miro board. (https://miro.com)
@@ -29,9 +28,10 @@ Friday, 12/01/2023
 * 03:54 PM - Initialized the database successfully, application creates an account with defines Identity role.
 * 04:05 PM - Brainstorming about a route that allows registered accounts to sign in.
 * 04:35 PM - Checking Microsoft's documentation about SignInManger, I already work with this class but I want to make sure before use it.
+```
 
-Tue, 12/05/2023
-
+## Tue, 12/05/2023
+```
 * 05:40 AM - Create CreateToken method, this method is used in SignIn route, it creates JSON Web Tokens to send to the user in response.
 * 06:03 AM - Searching about JWT, trying to decide what data needs to be in response tokens to use for future requests.
 * 06:07 AM - Using JWT Debugger tool to read successfully created tokens as part of SignIn route response, it works as expected (https://jwt.io/).
@@ -43,3 +43,11 @@ Tue, 12/05/2023
 (https://stackoverflow.com/questions/289727/which-mysql-data-type-to-use-for-storing-boolean-values)
 * 10:36 PM - Created a fleet controller.
 ```
+
+## Wed, 12/06/2023
+```
+* 05:50 AM - Working on Vehicle entity, adding new properties.
+* 06:17 AM - Added a new migration (new vehicle properties).
+* 06:23 AM - Created a POST route in fleet controller, this route adds vehicle into the database.
+```
+
