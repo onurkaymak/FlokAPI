@@ -57,4 +57,9 @@
 * 08:07 AM - Trying to set authorization for the POST route in the controller.
 * 08:16 AM - Reading ASP.NET documentation about role based authorization.
 * 08:27 AM - Still working on role based authorization.
+* 08:44 AM - Reading ASP.NET documentation "How to use Identity to secure a Web API backend for SPAs".
+(https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity-api-authorization?view=aspnetcore-6.0)
+* 08:56 AM - Watching a video about roled based auth on Youtube.
+(https://www.youtube.com/watch?v=KRVjIgr-WOU)
+* 09:18 AM - WIP role based auth, still trying to make this work.
 ```
