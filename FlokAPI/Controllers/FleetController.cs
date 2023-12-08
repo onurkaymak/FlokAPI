@@ -20,15 +20,20 @@ public class FleetController : ControllerBase
 
   [HttpGet]
   [Authorize(Roles = "MANAGER")]
-  public async Task<ActionResult<IEnumerable<Vehicle>>> Get(int? VIN)
+  public async Task<ActionResult<IEnumerable<Vehicle>>> Get(int VIN, string isRented, string inProduction)
   {
     IQueryable<Vehicle> query = _db.Vehicles.AsQueryable();
 
     try
     {
-      if (VIN != null)
+      if (VIN != 0)
       {
         query = query.Where(entry => entry.VIN == VIN);
+      }
+
+      if (isRented == "true")
+      {
+        query = query.Where(entry => entry.IsRented == true);
       }
 
       return await query.ToListAsync();
