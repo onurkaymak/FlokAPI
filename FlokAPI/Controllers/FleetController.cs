@@ -18,6 +18,27 @@ public class FleetController : ControllerBase
   }
 
 
+  [HttpGet]
+  public async Task<ActionResult<IEnumerable<Vehicle>>> Get(int? VIN)
+  {
+    IQueryable<Vehicle> query = _db.Vehicles.AsQueryable();
+
+    try
+    {
+      if (VIN != null)
+      {
+        query = query.Where(entry => entry.VIN == VIN);
+      }
+
+      return await query.ToListAsync();
+    }
+    catch
+    {
+      return BadRequest();
+    }
+  }
+
+
   [HttpPost]
   [Authorize(Roles = "MANAGER")]
   public async Task<ActionResult<Vehicle>> Post(Vehicle vehicle)
