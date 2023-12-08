@@ -68,8 +68,9 @@ public class FleetController : ControllerBase
     return Ok(new { status = "success", message = "Vehicle added into the inventory.", vehicle = vehicle });
   }
 
-  [Authorize]
+
   [HttpPut("{id}")]
+  [Authorize(Roles = "MANAGER")]
   public async Task<IActionResult> Put(int id, Vehicle vehicle)
   {
     if (id != vehicle.VehicleId)
@@ -103,8 +104,20 @@ public class FleetController : ControllerBase
   }
 
 
+  [HttpDelete("{id}")]
+  [Authorize(Roles = "MANAGER")]
+  public async Task<IActionResult> DeleteVehicle(int id)
+  {
+    Vehicle vehicle = await _db.Vehicles.FindAsync(id);
+    if (vehicle == null)
+    {
+      return NotFound();
+    }
 
+    _db.Vehicles.Remove(vehicle);
+    await _db.SaveChangesAsync();
 
-
+    return Ok(new { status = "success", message = "Vehicle deleted from the inventory.", vehicle = vehicle });
+  }
 
 }
