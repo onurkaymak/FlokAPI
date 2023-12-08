@@ -19,6 +19,7 @@ public class FleetController : ControllerBase
 
 
   [HttpGet]
+  [Authorize(Roles = "MANAGER")]
   public async Task<ActionResult<IEnumerable<Vehicle>>> Get(int? VIN)
   {
     IQueryable<Vehicle> query = _db.Vehicles.AsQueryable();
