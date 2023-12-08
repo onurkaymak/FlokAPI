@@ -55,4 +55,6 @@
 ```
 * 08:00 AM - Continuing to work on Fleet Controller.
 * 08:07 AM - Trying to set authorization for the POST route in the controller.
+* 08:16 AM - Reading ASP.NET documentation about role based authorization.
+* 08:27 AM - Still working on role based authorization.
 ```
