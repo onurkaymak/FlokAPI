@@ -62,4 +62,6 @@
 * 08:56 AM - Watching a video about roled based auth on Youtube.
 (https://www.youtube.com/watch?v=KRVjIgr-WOU)
 * 09:18 AM - WIP role based auth, still trying to make this work.
+* 09:41 AM - Debugging role based auth, having really hard time with this. Everything works good without roles but when I try to reach to auth protected routes, I got 403 Forbidden error. When I read the decoded token, I can see the user role in the token but route doesn't accept this.
+* 10:00 AM - Searching on internet about this role based auth problem.
 ```
