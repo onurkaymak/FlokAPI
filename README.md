@@ -64,5 +64,6 @@
 * 09:18 AM - WIP role based auth, still trying to make this work.
 * 09:41 AM - Debugging role based auth, having really hard time with this. Everything works good without roles but when I try to reach to auth protected routes, I got 403 Forbidden error. When I read the decoded token, I can see the user role in the token but route doesn't accept this.
 * 10:00 AM - Searching on internet about this role based auth problem.
-* 10:39 AM - Finally I found the problem, It took good amount of time. I could just pass this bug and focus on controller and routes but role based auth is an important feature for my application so I wanted fix this before go further. Still need refactor my Account Controller because routes work with hard coded roles at the moment. 
+* 10:39 AM - Finally I found the problem, It took good amount of time. I could just pass this bug and focus on controller and routes but role based auth is an important feature for my application so I wanted fix this before go further. Still need refactor my Account Controller because routes work with hard coded roles at the moment.
+* 02:59 PM - I've realized I need three different user model for this application, we work with ApplicationUser class that extends from IdentityUser in the classes but I'm planning to add two more user model.
 ```
