@@ -1,6 +1,6 @@
 ## Research & Planning Log
 
-## Friday, 12/01/2023
+## Fri, 12/01/2023
 ```
 * 08:00 AM - Initialize the project repo.
 * 08:30 AM - WIP capstone proposal.
@@ -51,3 +51,8 @@
 * 06:23 AM - Created a POST route in fleet controller, this route adds vehicle into the database.
 ```
 
+## Fri, 12/08/2023
+```
+* 08:00 AM - Continuing to work on Fleet Controller.
+* 08:07 AM - Trying to set authorization for the POST route in the controller.
+```

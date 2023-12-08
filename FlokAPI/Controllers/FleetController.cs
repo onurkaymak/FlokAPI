@@ -17,6 +17,7 @@ public class FleetController : ControllerBase
     _db = db;
   }
 
+  [Authorize]
   [HttpPost]
   public async Task<ActionResult<Vehicle>> Post(Vehicle vehicle)
   {
