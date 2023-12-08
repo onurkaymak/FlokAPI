@@ -20,13 +20,13 @@ public class FleetController : ControllerBase
 
   [HttpGet]
   [Authorize(Roles = "MANAGER")]
-  public async Task<ActionResult<IEnumerable<Vehicle>>> Get(int VIN, string isRented, string inProduction)
+  public async Task<ActionResult<IEnumerable<Vehicle>>> Get(string VIN, string isRented, string inProduction)
   {
     IQueryable<Vehicle> query = _db.Vehicles.AsQueryable();
 
     try
     {
-      if (VIN != 0)
+      if (VIN != null)
       {
         query = query.Where(entry => entry.VIN == VIN);
       }
@@ -34,6 +34,20 @@ public class FleetController : ControllerBase
       if (isRented == "true")
       {
         query = query.Where(entry => entry.IsRented == true);
+      }
+      else if (isRented == "false")
+      {
+        query = query.Where(entry => entry.IsRented == false);
+      }
+
+      if (inProduction == "true")
+      {
+        query = query.Where(entry => entry.InProduction == true);
+
+      }
+      else if (inProduction == "false")
+      {
+        query = query.Where(entry => entry.InProduction == false);
       }
 
       return await query.ToListAsync();
