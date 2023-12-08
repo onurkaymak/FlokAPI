@@ -67,4 +67,44 @@ public class FleetController : ControllerBase
     await _db.SaveChangesAsync();
     return Ok(new { status = "success", message = "Vehicle added into the inventory.", vehicle = vehicle });
   }
+
+  [Authorize]
+  [HttpPut("{id}")]
+  public async Task<IActionResult> Put(int id, Vehicle vehicle)
+  {
+    if (id != vehicle.VehicleId)
+    {
+      return BadRequest();
+    }
+
+    try
+    {
+      _db.Vehicles.Update(vehicle);
+
+      await _db.SaveChangesAsync();
+    }
+    catch (DbUpdateConcurrencyException)
+    {
+      if (!VehicleExists(id))
+      {
+        return NotFound();
+      }
+      else
+      {
+        throw;
+      }
+    }
+    return NoContent();
+  }
+
+  private bool VehicleExists(int id)
+  {
+    return _db.Vehicles.Any(e => e.VehicleId == id);
+  }
+
+
+
+
+
+
 }
