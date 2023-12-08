@@ -44,7 +44,7 @@ public class AccountsController : ControllerBase
     {
       Email = user.Email,
       UserName = user.UserName,
-      Role = user.Role
+      EmployeeRole = user.EmployeeRole.ToUpper()
     };
 
     var result = await _userManager.CreateAsync(newUser, user.Password);
@@ -52,7 +52,7 @@ public class AccountsController : ControllerBase
 
     if (result.Succeeded)
     {
-      await _userManager.AddToRoleAsync(newUser, user.Role);
+      await _userManager.AddToRoleAsync(newUser, user.EmployeeRole);
 
       return Ok(new { status = "success", message = "User has been successfully created" });
     }
@@ -75,9 +75,10 @@ public class AccountsController : ControllerBase
       {
         var authClaims = new List<Claim>
             {
-               new Claim("UserId", user.Id),
-               new Claim("UserName", user.UserName),
-               new Claim("Role", user.Role)
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim("JWTID", Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.Role, user.EmployeeRole)
             };
 
         var newToken = CreateToken(authClaims);
@@ -94,7 +95,7 @@ public class AccountsController : ControllerBase
     // This method iterates through an array of role names and checks if the role already exists with RoleExistsAsync method. 
     // If the role does not exist, it creates the role using CreateAsync method.
 
-    string[] roleNames = { "Auto Detailer", "Customer Service Agent", "Manager" };
+    string[] roleNames = { "AUTO DETAILER", "CUSTOMER SERVICE AGENT", "MANAGER" };
 
     foreach (var roleName in roleNames)
     {
