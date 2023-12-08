@@ -17,8 +17,9 @@ public class FleetController : ControllerBase
     _db = db;
   }
 
-  [Authorize(Roles = "Manager")]
+
   [HttpPost]
+  [Authorize(Roles = "MANAGER")]
   public async Task<ActionResult<Vehicle>> Post(Vehicle vehicle)
   {
     _db.Vehicles.Add(vehicle);
