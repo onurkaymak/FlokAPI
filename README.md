@@ -72,4 +72,5 @@
 (https://learn.microsoft.com/en-us/answers/questions/1266674/how-can-i-have-multiple-identity-user-types-when-u)
 * 4:18 PM - Trying to find a solution without multiple user class, maybe a simple join table can solve my problem?
 (https://stackoverflow.com/questions/28667360/how-to-create-a-new-user-when-inheriting-from-identityuser)
+* 8:05 PM - Working on a Join Entity, basically this join entity is going to be a record of the detailed fleet vehicles.
 ```
