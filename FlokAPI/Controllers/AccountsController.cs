@@ -32,7 +32,6 @@ public class AccountsController : ControllerBase
   {
     await CreateRoles();
 
-
     var userExists = await _userManager.FindByEmailAsync(user.Email);
 
     if (userExists != null)
@@ -48,7 +47,6 @@ public class AccountsController : ControllerBase
     };
 
     var result = await _userManager.CreateAsync(newUser, user.Password);
-
 
     if (result.Succeeded)
     {
