@@ -19,5 +19,10 @@ public class ProductionController : ControllerBase
 
 
 
+  [HttpPost]
+  [Authorize(Roles = "AUTO DETAILER")]
+  public async Task<ActionResult<Service>> Post(Service service)
+  {
 
+  }
 }
