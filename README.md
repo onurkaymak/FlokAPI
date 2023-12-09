@@ -66,4 +66,10 @@
 * 10:00 AM - Searching on internet about this role based auth problem.
 * 10:39 AM - Finally I found the problem, It took good amount of time. I could just pass this bug and focus on controller and routes but role based auth is an important feature for my application so I wanted fix this before go further. Still need refactor my Account Controller because routes work with hard coded roles at the moment.
 * 02:59 PM - I've realized I need three different user model for this application, we work with ApplicationUser class that extends from IdentityUser in the classes but I'm planning to add two more user model.
+* 03:02 PM - Started to search about this three different user models idea, found some interesting content on Stackoverflow.
+(https://stackoverflow.com/questions/64370175/how-to-add-multiple-identity-and-multiple-role-in-asp-net-core/64421573#64421573)
+* 03:12 PM - WIP multiple users in IdentityUser.
+(https://learn.microsoft.com/en-us/answers/questions/1266674/how-can-i-have-multiple-identity-user-types-when-u)
+* 4:18 PM - Trying to find a solution without multiple user class, maybe a simple join table can solve my problem?
+(https://stackoverflow.com/questions/28667360/how-to-create-a-new-user-when-inheriting-from-identityuser)
 ```
