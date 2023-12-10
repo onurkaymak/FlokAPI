@@ -282,11 +282,11 @@ namespace FlokAPI.Migrations
             modelBuilder.Entity("FlokAPI.Models.DetailingService", b =>
                 {
                     b.HasOne("FlokAPI.Models.ApplicationUser", "Detailer")
-                        .WithMany()
+                        .WithMany("JoinEntities")
                         .HasForeignKey("DetailerId");
 
                     b.HasOne("FlokAPI.Models.Vehicle", "Vehicle")
-                        .WithMany()
+                        .WithMany("JoinEntities")
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -345,6 +345,16 @@ namespace FlokAPI.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("FlokAPI.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("JoinEntities");
+                });
+
+            modelBuilder.Entity("FlokAPI.Models.Vehicle", b =>
+                {
+                    b.Navigation("JoinEntities");
                 });
 #pragma warning restore 612, 618
         }

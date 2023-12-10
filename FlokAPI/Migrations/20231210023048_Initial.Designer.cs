@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlokAPI.Migrations
 {
     [DbContext(typeof(FlokAPIContext))]
-    [Migration("20231208182817_UpdateRoles")]
-    partial class UpdateRoles
+    [Migration("20231210023048_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,6 +39,9 @@ namespace FlokAPI.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("EmployeeRole")
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
@@ -85,6 +88,27 @@ namespace FlokAPI.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("FlokAPI.Models.DetailingService", b =>
+                {
+                    b.Property<int>("DetailingServiceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("DetailerId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<int>("VehicleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DetailingServiceId");
+
+                    b.HasIndex("DetailerId");
+
+                    b.HasIndex("VehicleId");
+
+                    b.ToTable("DetailingServices");
+                });
+
             modelBuilder.Entity("FlokAPI.Models.Vehicle", b =>
                 {
                     b.Property<int>("VehicleId")
@@ -121,8 +145,8 @@ namespace FlokAPI.Migrations
                     b.Property<string>("State")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("VIN")
-                        .HasColumnType("int");
+                    b.Property<string>("VIN")
+                        .HasColumnType("longtext");
 
                     b.HasKey("VehicleId");
 
@@ -257,6 +281,23 @@ namespace FlokAPI.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("FlokAPI.Models.DetailingService", b =>
+                {
+                    b.HasOne("FlokAPI.Models.ApplicationUser", "Detailer")
+                        .WithMany("JoinEntities")
+                        .HasForeignKey("DetailerId");
+
+                    b.HasOne("FlokAPI.Models.Vehicle", "Vehicle")
+                        .WithMany("JoinEntities")
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Detailer");
+
+                    b.Navigation("Vehicle");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -306,6 +347,16 @@ namespace FlokAPI.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("FlokAPI.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("JoinEntities");
+                });
+
+            modelBuilder.Entity("FlokAPI.Models.Vehicle", b =>
+                {
+                    b.Navigation("JoinEntities");
                 });
 #pragma warning restore 612, 618
         }
