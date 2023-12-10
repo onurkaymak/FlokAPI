@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
 namespace FlokAPI.Controllers;
 
@@ -11,10 +12,12 @@ namespace FlokAPI.Controllers;
 public class FleetController : ControllerBase
 {
   private readonly FlokAPIContext _db;
+  private readonly UserManager<ApplicationUser> _userManager;
 
-  public FleetController(FlokAPIContext db)
+  public FleetController(FlokAPIContext db, UserManager<ApplicationUser> userManager)
   {
     _db = db;
+    _userManager = userManager;
   }
 
 
@@ -119,5 +122,43 @@ public class FleetController : ControllerBase
 
     return Ok(new { status = "success", message = "Vehicle deleted from the inventory.", vehicle = vehicle });
   }
+
+  [HttpPost]
+  [Route("AddDetailingService")]
+  public async Task<ActionResult<DetailingService>> AddDetailingService(DetailingServiceDto serviceInfo)
+  {
+    try
+    {
+      Vehicle vehicle = await _db.Vehicles.FirstOrDefaultAsync(v => v.VIN == serviceInfo.VIN);
+      ApplicationUser user = await _userManager.FindByIdAsync(serviceInfo.DetailerId);
+
+      if (vehicle == null || user == null)
+      {
+        throw new Exception("Vehicle or user not found, please try again.");
+      }
+
+#nullable enable
+      DetailingService? joinEntity = _db.DetailingServices.FirstOrDefault(join => (join.VehicleId == vehicle.VehicleId));
+#nullable disable
+
+      if (joinEntity == null)
+      {
+        _db.DetailingServices.Add(new DetailingService() { VehicleId = vehicle.VehicleId, DetailerId = user.Id });
+        _db.SaveChanges();
+      }
+      else
+      {
+        throw new Exception("This vehicle have been cleaned already.");
+      }
+
+      return Ok(new { status = "success", message = "You started to clean this vehicle.", VehicleVIN = vehicle.VIN, DetailerId = user.Id });
+    }
+    catch (Exception ex)
+    {
+      return BadRequest(new { status = "error", message = ex.Message });
+    }
+  }
+
+
 
 }
