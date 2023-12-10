@@ -6,6 +6,7 @@ namespace FlokAPI.Models
   {
 
     public string EmployeeRole { get; set; }
+    public List<DetailingService> JoinEntities { get; } // collection navigation property.
 
   }
 }

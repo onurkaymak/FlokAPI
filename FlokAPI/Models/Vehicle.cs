@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace FlokAPI.Models
 {
   public class Vehicle
@@ -14,5 +16,6 @@ namespace FlokAPI.Models
     public string LicensePlate { get; set; }
     public bool IsRented { get; set; } = false;
     public bool InProduction { get; set; } = false;
+    public List<DetailingService> JoinEntities { get; } // collection navigation property.
   }
 }
