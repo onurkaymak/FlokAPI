@@ -166,5 +166,51 @@ public class FleetController : ControllerBase
   }
 
 
+  [HttpDelete]
+  [Route("DeleteDetailingService")]
+  public async Task<ActionResult<DetailingService>> DeleteDetailingService(DetailingServiceDto serviceInfo)
+  {
+    try
+    {
+      Vehicle vehicle = await _db.Vehicles.FirstOrDefaultAsync(v => v.VIN == serviceInfo.VIN);
+      ApplicationUser user = await _userManager.FindByIdAsync(serviceInfo.DetailerId);
+      DetailingService service = await _db.DetailingServices.FirstOrDefaultAsync(s => s.VehicleId == vehicle.VehicleId);
+
+      if (vehicle == null || user == null || service == null)
+      {
+        throw new Exception("Something went wrong, please try again.");
+      }
+
+#nullable enable
+      DetailingService? joinEntity = _db.DetailingServices.FirstOrDefault(join => (join.DetailingServiceId == service.DetailingServiceId));
+#nullable disable
+
+      if (joinEntity != null)
+      {
+        _db.DetailingServices.Remove(service);
+
+        vehicle.InProduction = false;
+
+        _db.Vehicles.Update(vehicle);
+
+        user.TotalDetailing = user.TotalDetailing + 1;
+
+        await _userManager.UpdateAsync(user);
+
+        await _db.SaveChangesAsync();
+      }
+      else
+      {
+        throw new Exception("Cannot find any record of this service.");
+      }
+
+      return Ok(new { status = "success", message = "You finished cleaning of this vehicle.", VehicleVIN = vehicle.VIN, DetailerId = user.Id });
+    }
+    catch (Exception ex)
+    {
+      return BadRequest(new { status = "error", message = ex.Message });
+    }
+  }
+
 
 }
