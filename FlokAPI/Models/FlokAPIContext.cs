@@ -9,6 +9,7 @@ namespace FlokAPI.Models
     public DbSet<Vehicle> Vehicles { get; set; }
     public DbSet<DetailingService> DetailingServices { get; set; }
     public DbSet<Customer> Customers { get; set; }
+    public DbSet<RentalService> RentalServices { get; set; }
 
     public FlokAPIContext(DbContextOptions<FlokAPIContext> options) : base(options)
     {

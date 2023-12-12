@@ -6,5 +6,6 @@ namespace FlokAPI.Models
     public string Name { get; set; }
     public string Email { get; set; }
     public string PhoneNum { get; set; }
+    public List<RentalService> RentalJoinEntities { get; } // collection navigation property.
   }
 }

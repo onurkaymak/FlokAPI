@@ -17,5 +17,6 @@ namespace FlokAPI.Models
     public bool IsRented { get; set; } = false;
     public bool InProduction { get; set; } = false;
     public List<DetailingService> JoinEntities { get; } // collection navigation property.
+    public List<RentalService> RentalJoinEntities { get; } // collection navigation property.
   }
 }
