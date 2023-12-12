@@ -3,6 +3,7 @@ using System;
 using FlokAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlokAPI.Migrations
 {
     [DbContext(typeof(FlokAPIContext))]
-    partial class FlokAPIContextModelSnapshot : ModelSnapshot
+    [Migration("20231212145435_CustomerEntity")]
+    partial class CustomerEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
