@@ -123,6 +123,7 @@ public class FleetController : ControllerBase
     return Ok(new { status = "success", message = "Vehicle deleted from the inventory.", vehicle = vehicle });
   }
 
+
   [HttpPost]
   [Route("AddDetailingService")]
   public async Task<ActionResult<DetailingService>> AddDetailingService(DetailingServiceDto serviceInfo)
@@ -144,7 +145,12 @@ public class FleetController : ControllerBase
       if (joinEntity == null)
       {
         _db.DetailingServices.Add(new DetailingService() { VehicleId = vehicle.VehicleId, DetailerId = user.Id });
-        _db.SaveChanges();
+
+        vehicle.InProduction = true;
+
+        _db.Vehicles.Update(vehicle);
+
+        await _db.SaveChangesAsync();
       }
       else
       {
