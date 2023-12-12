@@ -21,5 +21,27 @@ public class ProductionController : ControllerBase
   }
 
 
+  [HttpGet("{id}")] // Get pending detailing records for the specific detailer.
+  public async Task<ActionResult<IEnumerable<DetailingService>>> Get(string id)
+  {
+    ApplicationUser user = await _userManager.FindByIdAsync(id);
+
+    IQueryable<DetailingService> query = _db.DetailingServices.AsQueryable();
+
+    try
+    {
+      if (user != null)
+      {
+        query = query.Where(entry => entry.DetailerId == user.Id);
+        // .Include(entry => entry.Detailer);
+      }
+
+      return await query.ToListAsync();
+    }
+    catch
+    {
+      return BadRequest();
+    }
+  }
 
 }
