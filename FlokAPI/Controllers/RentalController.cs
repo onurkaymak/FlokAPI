@@ -146,4 +146,23 @@ public class RentalController : ControllerBase
   }
 
 
+  [HttpDelete("{rentalServiceId}")]
+  public async Task<IActionResult> DeleteRentalService(int rentalServiceId)
+  {
+    RentalService rentalService = await _db.RentalServices.FindAsync(rentalServiceId);
+    Vehicle vehicle = await _db.Vehicles.FirstOrDefaultAsync(v => v.VehicleId == rentalService.VehicleId);
+
+    if (rentalService == null || vehicle == null)
+    {
+      return NotFound();
+    }
+
+    _db.RentalServices.Remove(rentalService);
+    vehicle.IsRented = false;
+    _db.Vehicles.Update(vehicle);
+    await _db.SaveChangesAsync();
+
+    return Ok(new { status = "success", message = "The vehicle deleted from the rented car list.", vehicle = vehicle });
+  }
+
 }
