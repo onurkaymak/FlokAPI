@@ -21,7 +21,37 @@ public class RentalController : ControllerBase
     _userManager = userManager;
   }
 
+  [HttpGet]
+  public async Task<ActionResult<IEnumerable<RentalService>>> Get(int rentalServiceId, string customerEmail, string customerPhoneNum)
+  {
+    IQueryable<RentalService> query = _db.RentalServices.AsQueryable();
 
+    try
+    {
+      if (rentalServiceId > 0)
+      {
+        query = query.Where(entry => entry.RentalServiceId == rentalServiceId);
+      }
+
+      if (customerEmail != null)
+      {
+        Customer customer = await _db.Customers.FirstOrDefaultAsync(c => c.Email == customerEmail);
+        query = query.Where(entry => entry.CustomerId == customer.CustomerId);
+      }
+
+      if (customerPhoneNum != null)
+      {
+        Customer customer = await _db.Customers.FirstOrDefaultAsync(c => c.PhoneNum == customerPhoneNum);
+        query = query.Where(entry => entry.CustomerId == customer.CustomerId);
+      }
+
+      return await query.ToListAsync();
+    }
+    catch
+    {
+      return BadRequest();
+    }
+  }
 
 
 }
