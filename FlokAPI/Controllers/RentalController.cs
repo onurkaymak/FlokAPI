@@ -107,4 +107,11 @@ public class RentalController : ControllerBase
   }
 
 
+
+  private bool RentalServiceExists(int rentalServiceId)
+  {
+    return _db.RentalServices.Any(e => e.RentalServiceId == rentalServiceId);
+  }
+
+
 }
