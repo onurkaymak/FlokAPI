@@ -107,6 +107,38 @@ public class RentalController : ControllerBase
   }
 
 
+  [HttpPut("{rentalServiceId}")]
+  public async Task<IActionResult> Put(int rentalServiceId, RentalServiceUpdateDto updatedRentalService)
+  {
+    if (rentalServiceId != updatedRentalService.RentalServiceId)
+    {
+      return BadRequest();
+    }
+
+    try
+    {
+      RentalService rentalService = await _db.RentalServices.FirstOrDefaultAsync(s => s.RentalServiceId == updatedRentalService.RentalServiceId);
+
+      rentalService.ReservationStart = DateTime.Parse(updatedRentalService.ReservationStart, System.Globalization.CultureInfo.InvariantCulture);
+      rentalService.ReservationEnd = DateTime.Parse(updatedRentalService.ReservationEnd, System.Globalization.CultureInfo.InvariantCulture);
+
+      _db.RentalServices.Update(rentalService);
+
+      await _db.SaveChangesAsync();
+    }
+    catch (DbUpdateConcurrencyException)
+    {
+      if (!RentalServiceExists(rentalServiceId))
+      {
+        return NotFound();
+      }
+      else
+      {
+        throw;
+      }
+    }
+    return NoContent();
+  }
 
   private bool RentalServiceExists(int rentalServiceId)
   {
