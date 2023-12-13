@@ -44,4 +44,26 @@ public class ProductionController : ControllerBase
     }
   }
 
+
+  [HttpGet] // Get pending detailing records for the specific detailer.
+  [Route("GetTotal/{id}")]
+  public async Task<ActionResult<IEnumerable<DetailingService>>> GetTotal(string id)
+  {
+    try
+    {
+      ApplicationUser user = await _userManager.FindByIdAsync(id);
+
+      if (user == null)
+      {
+        throw new Exception("Cannot find any record of this service.");
+      }
+
+      return Ok(new { status = "success", message = "Number of the vehicle you have detailed today.", Total = user.TotalDetailing });
+    }
+    catch (Exception ex)
+    {
+      return BadRequest(new { status = "error", message = ex.Message });
+    }
+  }
+
 }
