@@ -42,9 +42,16 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddControllers();
 
+builder.Services.AddCors(p => p.AddPolicy("corspolicy", builder =>
+{
+  builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+}));
+
 builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
+
+app.UseCors("corspolicy");
 
 app.UseHttpsRedirection();
 
