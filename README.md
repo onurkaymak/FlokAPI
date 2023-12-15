@@ -80,4 +80,5 @@
 ```
 * 08:20 AM - Working on CORS errors, trying to make test Http request from front-end (React) to back-end (ASP.NET) while serving both application on local.
 * 09:09 AM - Fixed CORS errors, I was able make a Http POST request from frontend to backend and created an account.
+* 09:30 AM - Working on Account controller, trying to implement a feature that allows users auto sign in after created an account.
 ```
