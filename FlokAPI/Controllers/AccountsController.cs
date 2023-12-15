@@ -81,7 +81,7 @@ public class AccountsController : ControllerBase
 
         var newToken = CreateToken(authClaims);
 
-        return Ok(new { status = "success", message = $"{userInfo.Email} signed in", token = newToken, userId = user.Id, userName = user.UserName });
+        return Ok(new { status = "success", message = $"{userInfo.Email} signed in", token = newToken, userId = user.Id, userName = user.UserName, userRole = user.EmployeeRole });
       }
     }
     return BadRequest(new { status = "error", message = "Unable to sign in" });
