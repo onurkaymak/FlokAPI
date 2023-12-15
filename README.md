@@ -74,3 +74,9 @@
 (https://stackoverflow.com/questions/28667360/how-to-create-a-new-user-when-inheriting-from-identityuser)
 * 8:05 PM - Working on a Join Entity, basically this join entity is going to be a record of the detailed fleet vehicles.
 ```
+
+## Fri, 12/15/2023
+
+```
+* 8:20 AM Working on CORS errors, trying to make test Http request from front-end (React) to back-end (ASP.NET) while serving both application on local.
+```
