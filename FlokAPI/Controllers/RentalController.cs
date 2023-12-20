@@ -37,16 +37,19 @@ public class RentalController : ControllerBase
       if (customerEmail != null)
       {
         Customer customer = await _db.Customers.FirstOrDefaultAsync(c => c.Email == customerEmail);
-        query = query.Where(entry => entry.CustomerId == customer.CustomerId);
+        query = query.Where(entry => entry.CustomerId == customer.CustomerId)
+                     .Include(e => e.Vehicle);
       }
 
       if (customerPhoneNum != null)
       {
         Customer customer = await _db.Customers.FirstOrDefaultAsync(c => c.PhoneNum == customerPhoneNum);
-        query = query.Where(entry => entry.CustomerId == customer.CustomerId);
+        query = query.Where(entry => entry.CustomerId == customer.CustomerId)
+                     .Include(e => e.Vehicle);
       }
 
       return await query.ToListAsync();
+
     }
     catch
     {
