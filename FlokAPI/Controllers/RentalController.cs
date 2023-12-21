@@ -25,7 +25,8 @@ public class RentalController : ControllerBase
   [HttpGet]
   public async Task<ActionResult<IEnumerable<RentalService>>> Get(int rentalServiceId, string customerEmail, string customerPhoneNum)
   {
-    IQueryable<RentalService> query = _db.RentalServices.AsQueryable();
+
+    IQueryable<RentalService> query = _db.RentalServices.AsQueryable().Include(e => e.Vehicle).Include(e => e.Customer);
 
     try
     {
@@ -48,8 +49,8 @@ public class RentalController : ControllerBase
       {
         Customer customer = await _db.Customers.FirstOrDefaultAsync(c => c.PhoneNum == customerPhoneNum);
         query = query.Where(entry => entry.CustomerId == customer.CustomerId)
-                     .Include(e => e.Vehicle)
-                     .Include(e => e.Customer);
+         .Include(e => e.Vehicle);
+        //  .Include(e => e.Customer);
       }
 
       return await query.ToListAsync();
