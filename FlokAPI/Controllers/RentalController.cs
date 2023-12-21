@@ -31,7 +31,10 @@ public class RentalController : ControllerBase
     {
       if (rentalServiceId > 0)
       {
-        query = query.Where(entry => entry.RentalServiceId == rentalServiceId);
+        RentalService rentalService = await _db.RentalServices.FirstOrDefaultAsync(rentalService => rentalService.RentalServiceId == rentalServiceId);
+        query = query.Where(entry => entry.RentalServiceId == rentalServiceId)
+                     .Include(e => e.Vehicle)
+                     .Include(e => e.Customer);
       }
 
       if (customerEmail != null)
@@ -45,7 +48,8 @@ public class RentalController : ControllerBase
       {
         Customer customer = await _db.Customers.FirstOrDefaultAsync(c => c.PhoneNum == customerPhoneNum);
         query = query.Where(entry => entry.CustomerId == customer.CustomerId)
-                     .Include(e => e.Vehicle);
+                     .Include(e => e.Vehicle)
+                     .Include(e => e.Customer);
       }
 
       return await query.ToListAsync();
