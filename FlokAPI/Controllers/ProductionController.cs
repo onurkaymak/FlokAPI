@@ -35,6 +35,10 @@ public class ProductionController : ControllerBase
         query = query.Where(entry => entry.DetailerId == user.Id);
         // .Include(entry => entry.Detailer);
       }
+      else
+      {
+        throw new Exception("Cannot find the employee from the provided id.");
+      }
 
       return await query.ToListAsync();
     }
@@ -45,7 +49,7 @@ public class ProductionController : ControllerBase
   }
 
 
-  [HttpGet] // Get pending detailing records for the specific detailer.
+  [HttpGet] // Get detailing records for the specific detailer.
   [Route("GetTotal/{id}")]
   public async Task<ActionResult<IEnumerable<DetailingService>>> GetTotal(string id)
   {
