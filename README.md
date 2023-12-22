@@ -206,7 +206,7 @@ CORS is a W3C standard that allows a server to relax the same-origin policy. It 
 #### API Endpoints
 
 | Request  | Type | 
-| :---: | :---: | 
+| :---: | Account | 
 | POST | /accounts/register |
 | POST | /accounts/signIn |
 
