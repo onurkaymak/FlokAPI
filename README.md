@@ -5,65 +5,63 @@
 <p align="center">
   
    <br>
-    <!-- <a href="https://www.nps.gov/index.htm" style="display:flex;justify-content:center;">
-        <img src="https://www.nps.gov/vafo/learn/kidsyouth/images/NPS-Arrowhead_v3.png" style="width:250px;height:250px;">
-    </a> -->
+    <a href="https://github.com/onurkaymak/FlokAPI" style="display:flex;justify-content:center;">
+        <img src="https://i.ibb.co/V2Pfc0p/flockbg.jpg" style="width:400px;height:250px;">
+    </a>
     <p align="center">
       ___________________________
     </p>
     <!-- GitHub Link -->
     <p align="center">
-        <a href="https://github.com/onurkaymak">
+        <a href=https://onurkaymak.com/">
             <strong>By Onur Kaymak</strong>
         </a>
     </p>
     <!-- Project Shields -->
     <p align="center">
-        <a href="https://github.com/onurkaymak/ParksLookupAPI/graphs/contributors">
+        <a href="https://github.com/onurkaymak/FlokAPI/graphs/contributors">
             <img src="https://img.shields.io/github/contributors/onurkaymak/ParksLookupAPI.svg?style=plastic">
         </a>
         &nbsp;
-        <a href="https://github.com/onurkaymak/ParksLookupAPI/stargazers">
+        <a href="https://github.com/onurkaymak/FlokAPI/stargazers">
             <img src="https://img.shields.io/github/stars/onurkaymak/ParksLookupAPI.svg?color=yellow&style=plastic">
         </a>
         &nbsp;
-        <a href="https://github.com/onurkaymak/ParksLookupAPI/issues">
+        <a href="https://github.com/onurkaymak/FlokAPI/issues">
             <img src="https://img.shields.io/github/issues/onurkaymak/ParksLookupAPI?style=plastic">
         </a>
         &nbsp;
-        <a href="https://github.com/jfpalchak/MessageBoardAPI/blob/main/LICENSE.txt">
+        <a href="https://github.com/jfpalchak/FlokAPI/blob/main/LICENSE.txt">
             <img src="https://img.shields.io/github/license/jfpalchak/MessageBoardAPI?color=orange&style=plastic">
         </a>
     </p>    
 </p>
 
 <p align="center">
-  <small>Initiated MM DDth, YYYY.</small>
+  <small>Initiated 12 01th, 2023.</small>
 </p>
 
 <!-- Project Links -->
 <p align="center">
-    <a href="https://github.com/onurkaymak/ParksLookupAPI.git"><big>Project Docs</big></a> ·
-    <a href="https://github.com/onurkaymak/ParksLookupAPI/issues"><big>Report Bug</big></a> ·
-    <a href="https://github.com/onurkaymak/ParksLookupAPI/issues"><big>Request Feature</big></a>
+    <a href="https://github.com/onurkaymak/FlokAPI.git"><big>Project Docs</big></a> ·
+    <a href="https://github.com/onurkaymak/FlokAPI/issues"><big>Report Bug</big></a> ·
+    <a href="https://github.com/onurkaymak/FlokAPI/issues"><big>Request Feature</big></a>
 </p>
 
 ------------------------------
 <u>Table of Contents</u>
 * <a href="#🌐-about-the-project">About the Project</a>
     * <a href="#📖-description">Description</a>
-    * <a href="#🦠-known-bugs">Known Bugs</a>
     * <a href="#🛠-built-with">Built With</a>
+    * <a href="#🦠-known-bugs">Known Bugs</a>
     <!-- * <a href="#🔍-preview">Preview</a> -->
 * <a href="#🏁-getting-started">Getting Started</a>
     * <a href="#📋-prerequisites">Prerequisites</a>
     * <a href="#⚙️-setup-and-use">Setup and Use</a>
 * <a href="#🛰️-api-documentation">API Documentation</a>
 * <a href="#🤝-contributors">Auxiliary</a>
-    * <a href="#🤝-contributors">Contributors</a>
     * <a href="#✉️-contact-and-support">Contact</a>
     * <a href="#⚖️-license">License</a>
-    * <a href="#🌟-acknowledgements">Acknowledgements</a>
 ------------------------------
 
 ## 🌐 About the Project
@@ -79,6 +77,10 @@ It's a full-stack application that is built on React with Redux & ASP.NET Web AP
 ### 🔗 Flok repository Link
 
 * [Flok](https://github.com/onurkaymak/Flok)
+
+### 🦠 Known Bugs
+
+* If any bugs are discovered, please contact the author(s).
 
 ### 🛠 Built With
 * [C#](https://docs.microsoft.com/en-us/dotnet/csharp/)
@@ -222,7 +224,9 @@ CORS is a W3C standard that allows a server to relax the same-origin policy. It 
 | Rental | PUT | /api/rental/{rentalServiceId} |
 | Rental | DELETE | /api/rental/DeleteRentalService/{rentalServiceId} |
 
+
 ### Accounts Controller
+
 
 `POST` /accounts/register
 
@@ -267,6 +271,8 @@ Until the Token expires, you should now have access to all endpoints requiring u
 
 <a href="https://ibb.co/gSqykJ9"><img src="https://i.ibb.co/c6fJ4Q3/Screenshot-2023-12-22-at-7-24-48-PM.png" alt="SignIn" border="0" style="height:350px;width:700px;"></a>
 
+
+
 ### Fleet Controller
 
 ⭐ Please note that, all the fleet routes are only accessible to "Manager" accounts, you need to use your token to access these routes.
@@ -289,6 +295,8 @@ Example Query
 https://localhost:5000/api/fleet?vin=12345678
 ```
 
+---
+
 `POST` /api/fleet
 
 You can add a new vehicle into Vehicles table in the database.
@@ -301,6 +309,8 @@ Sample JSON Request Body
     "detailerId": "8aa4b789-904a-4218-83d4-c5e4ab060fc1"
 }
 ```
+
+---
 
 `POST` api/fleet/AddDetailingService
 
@@ -324,6 +334,7 @@ Sample JSON Request Body
 }
 ```
 
+---
 
 `PUT` api/fleet/{id}
 
@@ -347,6 +358,8 @@ Sample JSON Request Body
 }
 ```
 
+---
+
 `DELETE` api/fleet/{id}
 
 You can delete an existing vehicle in the database.
@@ -355,6 +368,8 @@ Example Request
 ```
 https://localhost:5000/api/fleet/17
 ```
+
+---
 
 ### Production Controller
 
@@ -367,6 +382,8 @@ Example
 https://localhost:5000/api/production/8aa4b789-904a-4218-83d4-c5e4ab060fc1
 ```
 
+---
+
 `GET` api/production/GetTotal/{id}
 
 You can get all the detailing records about the detailer with the provided detailer id.
@@ -376,7 +393,10 @@ Example Request
 https://localhost:5000/api/production/GetTotal/8aa4b789-904a-4218-83d4-c5e4ab060fc1
 ```
 
+---
+
 ### Rental Controller
+
 
 `GET` api/rental
 
@@ -396,6 +416,8 @@ Example Query
 https://localhost:5000/api/fleet?customerEmail=test@test.com
 ```
 
+---
+
 `POST` api/rental
 
 You can book a vehicle with these route, this route uses a join table to join customer and vehicle tables with provided information.
@@ -411,6 +433,8 @@ Sample JSON Request Body
     "reservationEnd": "12/18/2023 10:30:00 PM"
 }
 ```
+
+---
 
 `PUT` /api/rental/{rentalServiceId}
 
@@ -428,6 +452,8 @@ Sample JSON Request Body
 }
 ```
 
+---
+
 `DELETE` /api/rental/DeleteRentalService/{rentalServiceId}
 
 You can delete an existing rentalService in the database. This is basically simulate an action for a returned rental vehicle. 
@@ -437,6 +463,7 @@ Example Request
 https://localhost:5000/api/rental/15
 ```
 
+---
 
 ## Research & Planning Log
 
@@ -523,12 +550,6 @@ https://localhost:5000/api/rental/15
 * 09:30 AM - Working on Account controller, trying to implement a feature that allows users auto sign in after created an account.
 ```
 ------------------------------
-
-### 🦠 Known Bugs
-
-* If any bugs are discovered, please contact the author(s).
-
-
 
 ### ✉️ Contact and Support
 
