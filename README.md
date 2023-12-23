@@ -203,7 +203,7 @@ CORS is a W3C standard that allows a server to relax the same-origin policy. It 
 
 ⭐ Please note that, this API allows CORS for development, you can run this API on your computer and make HTTP requests to this API.
 
-#### API Endpoints
+#### API Endpoints 
 
 | Controller  | Type | Endpoint | 
 | :---: | :---: | :---: | 
@@ -222,8 +222,7 @@ CORS is a W3C standard that allows a server to relax the same-origin policy. It 
 | Rental | PUT | api/rental/{rentalServiceId} |
 | Rental | DELETE | api/rental/DeleteRentalService/{rentalServiceId} |
 
-
-### Account Controller
+### Accounts Controller
 
 `POST` /accounts/register
 
@@ -266,6 +265,11 @@ Now let's copy that token from the response, and add it as an authorization head
 
 Until the Token expires, you should now have access to all endpoints requiring user authorization!
 
+<a href="https://ibb.co/gSqykJ9"><img src="https://i.ibb.co/c6fJ4Q3/Screenshot-2023-12-22-at-7-24-48-PM.png" alt="SignIn" border="0" style="height:350px;width:700px;"></a>
+
+### Fleet Controller
+
+`GET` /api/fleet
 
 
 
