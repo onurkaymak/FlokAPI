@@ -1,12 +1,11 @@
 <br>
-<p align="center">
-  <u><big>|| <b>Project Name</b> ||</big></u>
-</p>
+  <h1 align="center">Flok API</h1>
+
 <p align="center">
   
    <br>
     <a href="https://github.com/onurkaymak/FlokAPI" style="display:flex;justify-content:center;">
-        <img src="https://i.ibb.co/nfMH2jN/flok2.png" style="width:350px;height:100px;">
+        <img src="https://i.ibb.co/nfMH2jN/flok2.png" style="width:450px;height:100px;">
     </a>
     <p align="center">
       ___________________________
