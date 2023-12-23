@@ -223,6 +223,50 @@ CORS is a W3C standard that allows a server to relax the same-origin policy. It 
 | Rental | DELETE | api/rental/DeleteRentalService/{rentalServiceId} |
 
 
+### Account Controller
+
+`POST` /accounts/register
+
+We'll be using Postman for this example. Let's setup a POST request to the accounts/register endpoint. Select the 'Body' tab, choose the 'raw' radio button, and select 'JSON' from the dropdown selection.
+
+In the Body of the Post request, use the following format:
+```
+{
+    "email": "test@test.com",
+    "userName": "TestUser",
+    "password": "@Test123",
+    "employeeRole": "Manager"
+}
+```
+---
+
+`POST` /accounts/signIn
+
+To sign in, select the 'Body' tab, choose the 'raw' radio button, and select 'JSON' from the dropdown selection.
+
+In the Body of the Post request, use the following format:
+```
+{
+    "email": "test@test.com",
+    "password": "@Test123",
+}
+```
+Sample JSON Response
+{
+    "status": "success",
+    "message": "test@test.com signed in.",
+    "token": "xxxx.xxxx.xxxx"
+}
+
+<a href="https://ibb.co/4tP1HRT"><img src="https://gcdnb.pbrd.co/images/svw60XgYuJfQ.png?o=1" alt="SignIn" border="0" style="height:450px;width:700px;"/></a>
+
+⭐ Using the JSON Web Token
+
+Now let's copy that token from the response, and add it as an authorization header to our next request. Copy the token from the body, and click on the Authorization tab in Postman. On the 'Type', make sure that is set to 'Bearer Token', and then paste in the token in the field on the right.
+
+Until the Token expires, you should now have access to all endpoints requiring user authorization!
+
+
 
 
 
