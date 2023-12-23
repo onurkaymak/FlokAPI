@@ -269,10 +269,112 @@ Until the Token expires, you should now have access to all endpoints requiring u
 
 ### Fleet Controller
 
+⭐ Please note that, all the fleet routes are only accessible to "Manager" accounts, you need to use your token to access these routes.
+
 `GET` /api/fleet
 
+You can get all the vehicles in the Vehicles tables in the database, optionally you can use add queries to filter your search result.
+
+Queries
+
+| Query  | Required | 
+| :---: | :---: | 
+| VIN | No |
+| isRented | No |
+| inProduction | No |
 
 
+Example Query
+```
+https://localhost:5000/api/fleet?vin=12345678
+```
+
+`POST` /api/fleet
+
+You can add a new vehicle into Vehicles table in the database.
+
+Sample JSON Request Body
+
+```
+{
+    "VIN": "12345678",
+    "detailerId": "8aa4b789-904a-4218-83d4-c5e4ab060fc1"
+}
+```
+
+`POST` api/fleet/AddDetailingService
+
+You can add a new DetailingService in the database, new DetailingService is a record of the detailed vehicles with the detailer information.
+
+Sample JSON Request Body
+
+```
+{
+    "vin": "12345678",
+    "make": "Toyota",
+    "model": "Camry",
+    "color": "Red",
+    "mileage": "678",
+    "class": "Full Size",
+    "classCode": "FCAR",
+    "state": "OR",
+    "licensePlate": "OR123",
+    "isRented": false,
+    "inProduction": false
+}
+```
+
+
+`PUT` api/fleet/{id}
+
+You can update an existing vehicle in the database.
+
+Sample JSON Request Body
+```
+{
+      "vehicleId": 17,
+      "vin": "abcdefgh",
+      "make": "BMW",
+      "model": "X5",
+      "color": "White",
+      "mileage": 123,
+      "class": "Small Pickup",
+      "classCode": "SPAR",
+      "state": "CA",
+      "licensePlate": "WA123",
+      "isRented": false,
+      "inProduction": false
+}
+```
+
+`DELETE` api/fleet/{id}
+
+You can delete an existing vehicle in the database.
+
+Example
+```
+https://localhost:5000/api/fleet/17
+```
+
+### Production Controller
+
+`GET` api/production/{id}
+
+You can get pending detailing information about the detailer with the provided detailer id.
+
+Example
+```
+https://localhost:5000/api/production/8aa4b789-904a-4218-83d4-c5e4ab060fc1
+```
+
+`GET` api/production/GetTotal/{id}
+
+You can get all the detailing records about the detailer with the provided detailer id.
+
+Example
+```
+https://localhost:5000/api/production/GetTotal/8aa4b789-904a-4218-83d4-c5e4ab060fc1
+```
 
 ## Research & Planning Log
 
