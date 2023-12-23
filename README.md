@@ -209,18 +209,18 @@ CORS is a W3C standard that allows a server to relax the same-origin policy. It 
 | :---: | :---: | :---: | 
 | Accounts | POST | /accounts/register |
 | Accounts | POST | /accounts/signIn |
-| Fleet | GET | api/fleet |
-| Fleet | POST | api/fleet |
-| Fleet | POST | api/fleet/AddDetailingService |
-| Fleet | PUT | api/fleet/{id} |
-| Fleet | DELETE | api/fleet/{id} |
-| Fleet | DELETE | api/fleet/DeleteDetailingService |
-| Production | GET | api/production/{id} |
-| Production | GET | api/production/GetTotal/{id} |
-| Rental | GET | api/rental |
-| Rental | POST | api/rental |
-| Rental | PUT | api/rental/{rentalServiceId} |
-| Rental | DELETE | api/rental/DeleteRentalService/{rentalServiceId} |
+| Fleet | GET | /api/fleet |
+| Fleet | POST | /api/fleet |
+| Fleet | POST | /api/fleet/AddDetailingService |
+| Fleet | PUT | /api/fleet/{id} |
+| Fleet | DELETE | /api/fleet/{id} |
+| Fleet | DELETE | /api/fleet/DeleteDetailingService |
+| Production | GET | /api/production/{id} |
+| Production | GET | /api/production/GetTotal/{id} |
+| Rental | GET | /api/rental |
+| Rental | POST | /api/rental |
+| Rental | PUT | /api/rental/{rentalServiceId} |
+| Rental | DELETE | /api/rental/DeleteRentalService/{rentalServiceId} |
 
 ### Accounts Controller
 
@@ -351,7 +351,7 @@ Sample JSON Request Body
 
 You can delete an existing vehicle in the database.
 
-Example
+Example Request
 ```
 https://localhost:5000/api/fleet/17
 ```
@@ -371,10 +371,72 @@ https://localhost:5000/api/production/8aa4b789-904a-4218-83d4-c5e4ab060fc1
 
 You can get all the detailing records about the detailer with the provided detailer id.
 
-Example
+Example Request
 ```
 https://localhost:5000/api/production/GetTotal/8aa4b789-904a-4218-83d4-c5e4ab060fc1
 ```
+
+### Rental Controller
+
+`GET` api/rental
+
+You can check all the booked vehicles from this route, optionally you can use queries to filter your search results.
+
+Queries
+
+| Query  | Required | 
+| :---: | :---: | 
+| rentalServiceId | No |
+| customerEmail | No |
+| customerPhoneNum | No |
+
+
+Example Query
+```
+https://localhost:5000/api/fleet?customerEmail=test@test.com
+```
+
+`POST` api/rental
+
+You can book a vehicle with these route, this route uses a join table to join customer and vehicle tables with provided information.
+
+Sample JSON Request Body
+
+```
+{
+    "VIN": "12345678",
+    "customerEmail": "carlajohns@gmail.com",
+    "serviceAgentId": "8aa4b789-904a-4218-83d4-c5e4ab060fc1",
+    "reservationStart": "12/14/2023 8:30:00 AM",
+    "reservationEnd": "12/18/2023 10:30:00 PM"
+}
+```
+
+`PUT` /api/rental/{rentalServiceId}
+
+You can update an existing reservation in the database.
+
+Sample JSON Request Body
+```
+{
+    "rentalServiceId": 3,
+    "vehicleid": 1,
+    "customerId": 3,
+    "ServiceAgentId": "436c0226-8889-4ebf-bf5d-7c2401ac79c2",
+    "reservationStart": "12/13/2023 10:30:00 AM",
+    "reservationEnd": "12/17/2023 19:30:00 PM"
+}
+```
+
+`DELETE` /api/rental/DeleteRentalService/{rentalServiceId}
+
+You can delete an existing rentalService in the database. This is basically simulate an action for a returned rental vehicle. 
+
+Example Request
+```
+https://localhost:5000/api/rental/15
+```
+
 
 ## Research & Planning Log
 
