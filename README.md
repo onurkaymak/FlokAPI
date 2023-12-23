@@ -205,10 +205,24 @@ CORS is a W3C standard that allows a server to relax the same-origin policy. It 
 
 #### API Endpoints
 
-| Request  | Type | 
-| :---: | Account | 
-| POST | /accounts/register |
-| POST | /accounts/signIn |
+| Controller  | Type | Endpoint | 
+| :---: | :---: | :---: | 
+| Accounts | POST | /accounts/register |
+| Accounts | POST | /accounts/signIn |
+| Fleet | GET | api/fleet |
+| Fleet | POST | api/fleet |
+| Fleet | POST | api/fleet/AddDetailingService |
+| Fleet | PUT | api/fleet/{id} |
+| Fleet | DELETE | api/fleet/{id} |
+| Fleet | DELETE | api/fleet/DeleteDetailingService |
+| Production | GET | api/production/{id} |
+| Production | GET | api/production/GetTotal/{id} |
+| Rental | GET | api/rental |
+| Rental | POST | api/rental |
+| Rental | PUT | api/rental/{rentalServiceId} |
+| Rental | DELETE | api/rental/DeleteRentalService/{rentalServiceId} |
+
+
 
 
 
