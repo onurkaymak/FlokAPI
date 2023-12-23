@@ -6,7 +6,7 @@
   
    <br>
     <a href="https://github.com/onurkaymak/FlokAPI" style="display:flex;justify-content:center;">
-        <img src="https://i.ibb.co/V2Pfc0p/flockbg.jpg" style="width:400px;height:250px;">
+        <img src="https://i.ibb.co/nfMH2jN/flok2.png" style="width:350px;height:100px;">
     </a>
     <p align="center">
       ___________________________
@@ -38,7 +38,7 @@
 </p>
 
 <p align="center">
-  <small>Initiated 12 01th, 2023.</small>
+  <small>Initiated December 01th, 2023.</small>
 </p>
 
 <!-- Project Links -->
