@@ -199,12 +199,24 @@ Explore the API endpoints in Postman. Please note that, you will not be able to 
 ### Using the JSON Web Token
 In order to be authorized to use the POST, PUT, DELETE functionality of the API, please authenticate yourself through Postman.
 
+---
+
 ### Note on CORS
 CORS is a W3C standard that allows a server to relax the same-origin policy. It is not a security feature, CORS relaxes security. It allows a server to explicitly allow some cross-origin requests while rejecting others. An API is not safer by allowing CORS. For more information or to see how CORS functions, see the Microsoft documentation. 
 
 ⭐ Please note that, this API allows CORS for development, you can run this API on your computer and make HTTP requests to this API.
 
-#### API Endpoints 
+---
+
+### Database Diagram
+
+<a href="https://ibb.co/SdB1KwL"><img src="https://i.ibb.co/LJ1qCdG/Database-Diagram.png" alt="Database-Diagram" border="0"></a>
+
+⭐ This application uses EF Core Entity features to create migrations and update the database tables includes join tables.
+
+---
+
+### API Endpoints 
 
 | Controller  | Type | Endpoint | 
 | :---: | :---: | :---: | 
@@ -223,6 +235,7 @@ CORS is a W3C standard that allows a server to relax the same-origin policy. It 
 | Rental | PUT | /api/rental/{rentalServiceId} |
 | Rental | DELETE | /api/rental/DeleteRentalService/{rentalServiceId} |
 
+---
 
 ### Accounts Controller
 
