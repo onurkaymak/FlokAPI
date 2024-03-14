@@ -98,7 +98,7 @@ public class FleetController : ControllerBase
         throw;
       }
     }
-    return NoContent();
+    return Ok(new { status = "success", message = "Vehicle has been updated.", vehicle });
   }
 
   private bool VehicleExists(int id)
