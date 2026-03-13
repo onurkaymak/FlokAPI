@@ -100,10 +100,6 @@ It's a full-stack application that is built on React with Redux & ASP.NET Web AP
 #### Install .NET Core
   * [Click here](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) to download the .NET Core SDK from Microsoft Corp.
 
-
-#### Install dotnet script
- Enter the command ``dotnet tool install -g dotnet-script`` in Terminal for macOS or PowerShell for Windows.
-
 #### Install dotnet-ef
 For Entity Framework Core, we'll use a tool called dotnet-ef to reference the project's migrations and update our database accordingly. To install this tool globally, run the following command in your terminal:
 
