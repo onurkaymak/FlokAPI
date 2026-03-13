@@ -98,10 +98,8 @@ It's a full-stack application that is built on React with Redux & ASP.NET Web AP
 ### 📋 Prerequisites
 
 #### Install .NET Core
-* On macOS Mojave or later
-  * [Click here](https://dotnet.microsoft.com/download/thank-you/dotnet-sdk-2.2.106-macos-x64-installer) to download the .NET Core SDK from Microsoft Corp for macOS.
-* On Windows 10 x64 or later
-  * [Click here](https://dotnet.microsoft.com/download/thank-you/dotnet-sdk-2.2.203-windows-x64-installer) to download the 64-bit .NET Core SDK from Microsoft Corp for Windows.
+  * [Click here](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) to download the .NET Core SDK from Microsoft Corp for macOS.
+
 
 #### Install dotnet script
  Enter the command ``dotnet tool install -g dotnet-script`` in Terminal for macOS or PowerShell for Windows.
