@@ -98,7 +98,7 @@ It's a full-stack application that is built on React with Redux & ASP.NET Web AP
 ### 📋 Prerequisites
 
 #### Install .NET Core
-  * [Click here](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) to download the .NET Core SDK from Microsoft Corp for macOS.
+  * [Click here](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) to download the .NET Core SDK from Microsoft Corp.
 
 
 #### Install dotnet script
