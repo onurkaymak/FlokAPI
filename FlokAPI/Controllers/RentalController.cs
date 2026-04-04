@@ -25,7 +25,6 @@ public class RentalController : ControllerBase
   [HttpGet]
   public async Task<ActionResult<IEnumerable<RentalService>>> Get(int rentalServiceId, string customerEmail, string customerPhoneNum)
   {
-
     IQueryable<RentalService> query = _db.RentalServices.AsQueryable().Include(e => e.Vehicle).Include(e => e.Customer);
 
     try
@@ -49,19 +48,16 @@ public class RentalController : ControllerBase
       {
         Customer customer = await _db.Customers.FirstOrDefaultAsync(c => c.PhoneNum == customerPhoneNum);
         query = query.Where(entry => entry.CustomerId == customer.CustomerId)
-         .Include(e => e.Vehicle);
-        //  .Include(e => e.Customer);
+                     .Include(e => e.Vehicle);
       }
 
       return await query.ToListAsync();
-
     }
     catch
     {
       return BadRequest();
     }
   }
-
 
   [HttpPost]
   public async Task<ActionResult<RentalService>> Post(RentalServiceDto rentalInfo)
@@ -74,11 +70,6 @@ public class RentalController : ControllerBase
       if (vehicle == null || customer == null)
       {
         throw new Exception("Vehicle or customer not found, please try again.");
-      }
-
-      if (vehicle.InProduction == true)
-      {
-        throw new Exception("This vehicle is in production, please try again later.");
       }
 
 #nullable enable
@@ -114,7 +105,6 @@ public class RentalController : ControllerBase
       return BadRequest(new { status = "error", message = ex.Message });
     }
   }
-
 
   [HttpPut("{rentalServiceId}")]
   public async Task<IActionResult> Put(int rentalServiceId, RentalServiceUpdateDto updatedRentalService)
@@ -154,7 +144,6 @@ public class RentalController : ControllerBase
     return _db.RentalServices.Any(e => e.RentalServiceId == rentalServiceId);
   }
 
-
   [HttpDelete("{rentalServiceId}")]
   public async Task<IActionResult> DeleteRentalService(int rentalServiceId)
   {
@@ -173,5 +162,4 @@ public class RentalController : ControllerBase
 
     return Ok(new { status = "success", message = "The vehicle deleted from the rented car list.", vehicle = vehicle });
   }
-
 }

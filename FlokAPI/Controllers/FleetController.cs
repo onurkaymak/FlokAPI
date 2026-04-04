@@ -20,10 +20,9 @@ public class FleetController : ControllerBase
     _userManager = userManager;
   }
 
-
   [HttpGet]
   [Authorize(Roles = "MANAGER")]
-  public async Task<ActionResult<IEnumerable<Vehicle>>> Get(string VIN, string isRented, string inProduction)
+  public async Task<ActionResult<IEnumerable<Vehicle>>> Get(string VIN, string isRented)
   {
     IQueryable<Vehicle> query = _db.Vehicles.AsQueryable();
 
@@ -43,16 +42,6 @@ public class FleetController : ControllerBase
         query = query.Where(entry => entry.IsRented == false);
       }
 
-      if (inProduction == "true")
-      {
-        query = query.Where(entry => entry.InProduction == true);
-
-      }
-      else if (inProduction == "false")
-      {
-        query = query.Where(entry => entry.InProduction == false);
-      }
-
       return await query.ToListAsync();
     }
     catch
@@ -60,7 +49,6 @@ public class FleetController : ControllerBase
       return BadRequest();
     }
   }
-
 
   [HttpPost]
   [Authorize(Roles = "MANAGER")]
@@ -70,7 +58,6 @@ public class FleetController : ControllerBase
     await _db.SaveChangesAsync();
     return Ok(new { status = "success", message = "Vehicle added into the inventory.", vehicle = vehicle });
   }
-
 
   [HttpPut("{id}")]
   [Authorize(Roles = "MANAGER")]
@@ -84,7 +71,6 @@ public class FleetController : ControllerBase
     try
     {
       _db.Vehicles.Update(vehicle);
-
       await _db.SaveChangesAsync();
     }
     catch (DbUpdateConcurrencyException)
@@ -106,7 +92,6 @@ public class FleetController : ControllerBase
     return _db.Vehicles.Any(e => e.VehicleId == id);
   }
 
-
   [HttpDelete("{id}")]
   [Authorize(Roles = "MANAGER")]
   public async Task<IActionResult> DeleteVehicle(int id)
@@ -122,95 +107,4 @@ public class FleetController : ControllerBase
 
     return Ok(new { status = "success", message = "Vehicle deleted from the inventory.", vehicle = vehicle });
   }
-
-
-  [HttpPost]
-  [Route("AddDetailingService")]
-  public async Task<ActionResult<DetailingService>> AddDetailingService(DetailingServiceDto serviceInfo)
-  {
-    try
-    {
-      Vehicle vehicle = await _db.Vehicles.FirstOrDefaultAsync(v => v.VIN == serviceInfo.VIN);
-      ApplicationUser user = await _userManager.FindByIdAsync(serviceInfo.DetailerId);
-
-      if (vehicle == null || user == null)
-      {
-        throw new Exception("Vehicle or user not found, please try again.");
-      }
-
-#nullable enable
-      DetailingService? joinEntity = _db.DetailingServices.FirstOrDefault(join => (join.VehicleId == vehicle.VehicleId));
-#nullable disable
-
-      if (joinEntity == null)
-      {
-        _db.DetailingServices.Add(new DetailingService() { VehicleId = vehicle.VehicleId, DetailerId = user.Id });
-
-        vehicle.InProduction = true;
-
-        _db.Vehicles.Update(vehicle);
-
-        await _db.SaveChangesAsync();
-      }
-      else
-      {
-        throw new Exception("This vehicle have been cleaned already.");
-      }
-
-      return Ok(new { status = "success", message = "You started to clean this vehicle.", VehicleVIN = vehicle.VIN, DetailerId = user.Id });
-    }
-    catch (Exception ex)
-    {
-      return BadRequest(new { status = "error", message = ex.Message });
-    }
-  }
-
-
-  [HttpDelete]
-  [Route("DeleteDetailingService")]
-  public async Task<ActionResult<DetailingService>> DeleteDetailingService(DetailingServiceDto serviceInfo)
-  {
-    try
-    {
-      Vehicle vehicle = await _db.Vehicles.FirstOrDefaultAsync(v => v.VIN == serviceInfo.VIN);
-      ApplicationUser user = await _userManager.FindByIdAsync(serviceInfo.DetailerId);
-      DetailingService service = await _db.DetailingServices.FirstOrDefaultAsync(s => s.VehicleId == vehicle.VehicleId);
-
-      if (vehicle == null || user == null || service == null)
-      {
-        throw new Exception("Something went wrong, please try again.");
-      }
-
-#nullable enable
-      DetailingService? joinEntity = _db.DetailingServices.FirstOrDefault(join => (join.DetailingServiceId == service.DetailingServiceId));
-#nullable disable
-
-      if (joinEntity != null)
-      {
-        _db.DetailingServices.Remove(service);
-
-        vehicle.InProduction = false;
-
-        _db.Vehicles.Update(vehicle);
-
-        user.TotalDetailing = user.TotalDetailing + 1;
-
-        await _userManager.UpdateAsync(user);
-
-        await _db.SaveChangesAsync();
-      }
-      else
-      {
-        throw new Exception("Cannot find any record of this service.");
-      }
-
-      return Ok(new { status = "success", message = "You finished cleaning of this vehicle.", VehicleVIN = vehicle.VIN, DetailerId = user.Id });
-    }
-    catch (Exception ex)
-    {
-      return BadRequest(new { status = "error", message = ex.Message });
-    }
-  }
-
-
 }
