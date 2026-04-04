@@ -15,7 +15,6 @@ namespace FlokAPI.Models
     public string State { get; set; }
     public string LicensePlate { get; set; }
     public bool IsRented { get; set; } = false;
-    public bool InProduction { get; set; } = false;
     public List<DetailingService> JoinEntities { get; } // collection navigation property.
     public List<RentalService> RentalJoinEntities { get; } // collection navigation property.
   }
