@@ -1,9 +1,7 @@
 using FlokAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using System.Threading.Tasks;
 
 namespace FlokAPI.Controllers;
 
@@ -20,49 +18,17 @@ public class ProductionController : ControllerBase
     _userManager = userManager;
   }
 
-  // ??? Get All Pending Detailings
-  [HttpGet("{id}")] // Get pending detailing records for the specific detailer.
-  public async Task<ActionResult<IEnumerable<DetailingService>>> Get(string id)
-  {
-    ApplicationUser user = await _userManager.FindByIdAsync(id);
-
-    IQueryable<DetailingService> query = _db.DetailingServices.AsQueryable();
-
-    try
-    {
-      if (user != null)
-      {
-        query = query.Where(entry => entry.DetailerId == user.Id);
-        // .Include(entry => entry.Detailer);
-      }
-      else
-      {
-        throw new Exception("Cannot find the employee from the provided id.");
-      }
-
-      return await query.ToListAsync();
-    }
-    catch
-    {
-      return BadRequest();
-    }
-  }
-
-
-  [HttpGet] // Get detailing records for the specific detailer.
-  [Route("GetTotal/{id}")]
-  public async Task<ActionResult<IEnumerable<DetailingService>>> GetTotal(string id)
+  [HttpGet]
+  public async Task<ActionResult<IEnumerable<DetailingService>>> Get()
   {
     try
     {
-      ApplicationUser user = await _userManager.FindByIdAsync(id);
+      List<DetailingService> detailingServices = await _db.DetailingServices
+        .Include(e => e.Vehicle)
+        .Include(e => e.Detailer)
+        .ToListAsync();
 
-      if (user == null)
-      {
-        throw new Exception("Cannot find any record of this service.");
-      }
-
-      return Ok(new { status = "success", message = "Number of the vehicle you have detailed today.", Total = user.TotalDetailing });
+      return Ok(detailingServices);
     }
     catch (Exception ex)
     {
@@ -70,4 +36,59 @@ public class ProductionController : ControllerBase
     }
   }
 
+  [HttpGet("leaderboard")]
+  public async Task<ActionResult> GetLeaderboard()
+  {
+    try
+    {
+      var leaderboard = await _db.DetailingServices
+        .Where(s => s.CreatedAt.Date == DateTime.UtcNow.Date)
+        .Include(s => s.Detailer)
+        .GroupBy(s => new { s.DetailerId, s.Detailer.UserName })
+        .Select(g => new { Name = g.Key.UserName, Count = g.Count() })
+        .OrderByDescending(g => g.Count)
+        .ToListAsync();
+
+      return Ok(new { status = "success", leaderboard });
+    }
+    catch (Exception ex)
+    {
+      return BadRequest(new { status = "error", message = ex.Message });
+    }
+  }
+
+  [HttpPost]
+  public async Task<ActionResult> Post(DetailingServiceDto detailingInfo)
+  {
+    try
+    {
+      Vehicle vehicle = await _db.Vehicles.FirstOrDefaultAsync(v => v.VIN == detailingInfo.VIN);
+      ApplicationUser detailer = await _userManager.FindByIdAsync(detailingInfo.DetailerId);
+
+      if (vehicle == null)
+      {
+        throw new Exception("Vehicle not found. Please check the VIN and try again.");
+      }
+
+      if (detailer == null)
+      {
+        throw new Exception("Detailer not found. Please try again.");
+      }
+
+      _db.DetailingServices.Add(new DetailingService()
+      {
+        VehicleId = vehicle.VehicleId,
+        DetailerId = detailer.Id,
+        CreatedAt = DateTime.UtcNow
+      });
+
+      await _db.SaveChangesAsync();
+
+      return Ok(new { status = "success", message = "Vehicle scan recorded successfully.", vehicle = vehicle, detailer = detailer });
+    }
+    catch (Exception ex)
+    {
+      return BadRequest(new { status = "error", message = ex.Message });
+    }
+  }
 }
