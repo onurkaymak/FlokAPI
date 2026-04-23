@@ -54,11 +54,13 @@ builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
 
-// Seed users on startup
 using (var scope = app.Services.CreateScope())
 {
   var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
   var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+  var db = scope.ServiceProvider.GetRequiredService<FlokAPIContext>();
+
+  await db.Database.MigrateAsync();
 
   // Ensure roles exist
   string[] roles = { "MANAGER", "AUTO DETAILER", "CUSTOMER SERVICE AGENT" };
@@ -128,30 +130,33 @@ using (var scope = app.Services.CreateScope())
     await userManager.AddToRoleAsync(agent, "CUSTOMER SERVICE AGENT");
   }
 
-  // Seed Detailing Services if none exist
-  var db = scope.ServiceProvider.GetRequiredService<FlokAPIContext>();
-
-  if (!db.DetailingServices.Any())
+  try
   {
-    db.DetailingServices.AddRange(
-      new DetailingService { VehicleId = 2, DetailerId = FlokAPIContext.Detailer1Id, CreatedAt = DateTime.UtcNow.Date.AddHours(9) },
-      new DetailingService { VehicleId = 3, DetailerId = FlokAPIContext.Detailer1Id, CreatedAt = DateTime.UtcNow.Date.AddHours(10) },
-      new DetailingService { VehicleId = 5, DetailerId = FlokAPIContext.Detailer1Id, CreatedAt = DateTime.UtcNow.Date.AddHours(11) },
-      new DetailingService { VehicleId = 6, DetailerId = FlokAPIContext.Detailer2Id, CreatedAt = DateTime.UtcNow.Date.AddHours(9) },
-      new DetailingService { VehicleId = 7, DetailerId = FlokAPIContext.Detailer2Id, CreatedAt = DateTime.UtcNow.Date.AddHours(10) }
-    );
-    await db.SaveChangesAsync();
+    if (!db.DetailingServices.Any())
+    {
+      db.DetailingServices.AddRange(
+        new DetailingService { VehicleId = 2, DetailerId = FlokAPIContext.Detailer1Id, CreatedAt = DateTime.UtcNow.Date.AddHours(9) },
+        new DetailingService { VehicleId = 3, DetailerId = FlokAPIContext.Detailer1Id, CreatedAt = DateTime.UtcNow.Date.AddHours(10) },
+        new DetailingService { VehicleId = 5, DetailerId = FlokAPIContext.Detailer1Id, CreatedAt = DateTime.UtcNow.Date.AddHours(11) },
+        new DetailingService { VehicleId = 6, DetailerId = FlokAPIContext.Detailer2Id, CreatedAt = DateTime.UtcNow.Date.AddHours(9) },
+        new DetailingService { VehicleId = 7, DetailerId = FlokAPIContext.Detailer2Id, CreatedAt = DateTime.UtcNow.Date.AddHours(10) }
+      );
+      await db.SaveChangesAsync();
+    }
+
+    if (!db.RentalServices.Any())
+    {
+      db.RentalServices.AddRange(
+        new RentalService { VehicleId = 1, CustomerId = 1, ServiceAgentId = FlokAPIContext.AgentId, ReservationStart = new DateTime(2026, 4, 1, 9, 0, 0), ReservationEnd = new DateTime(2026, 4, 7, 9, 0, 0) },
+        new RentalService { VehicleId = 4, CustomerId = 3, ServiceAgentId = FlokAPIContext.AgentId, ReservationStart = new DateTime(2026, 4, 3, 10, 0, 0), ReservationEnd = new DateTime(2026, 4, 10, 10, 0, 0) },
+        new RentalService { VehicleId = 2, CustomerId = 5, ServiceAgentId = FlokAPIContext.AgentId, ReservationStart = new DateTime(2026, 3, 20, 8, 0, 0), ReservationEnd = new DateTime(2026, 3, 25, 8, 0, 0) }
+      );
+      await db.SaveChangesAsync();
+    }
   }
-
-  // Seed Rental Services if none exist
-  if (!db.RentalServices.Any())
+  catch (Exception ex)
   {
-    db.RentalServices.AddRange(
-      new RentalService { VehicleId = 1, CustomerId = 1, ServiceAgentId = FlokAPIContext.AgentId, ReservationStart = new DateTime(2026, 4, 1, 9, 0, 0), ReservationEnd = new DateTime(2026, 4, 7, 9, 0, 0) },
-      new RentalService { VehicleId = 4, CustomerId = 3, ServiceAgentId = FlokAPIContext.AgentId, ReservationStart = new DateTime(2026, 4, 3, 10, 0, 0), ReservationEnd = new DateTime(2026, 4, 10, 10, 0, 0) },
-      new RentalService { VehicleId = 2, CustomerId = 5, ServiceAgentId = FlokAPIContext.AgentId, ReservationStart = new DateTime(2026, 3, 20, 8, 0, 0), ReservationEnd = new DateTime(2026, 3, 25, 8, 0, 0) }
-    );
-    await db.SaveChangesAsync();
+    Console.WriteLine($"Seeding warning: {ex.Message}");
   }
 }
 
